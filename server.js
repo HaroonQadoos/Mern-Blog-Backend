@@ -33,7 +33,10 @@ connectDB();
 
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:5174/",
+      "https://mern-blog-backend-94vv.vercel.app/",
+    ],
     credentials: true,
   })
 );
