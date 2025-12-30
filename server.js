@@ -1,56 +1,3 @@
-// const express = require("express");
-// const cors = require("cors");
-// const dotenv = require("dotenv");
-// const cookieParser = require("cookie-parser");
-// const mongoose = require("mongoose");
-
-// const postRoutes = require("./routes/postRoutes");
-// const authRoutes = require("./routes/authRoutes");
-// const adminRoutes = require("./routes/adminRoutes");
-
-// dotenv.config();
-
-// const app = express();
-
-// //Mongodb
-// let isConnected = false;
-// const connectDB = async () => {
-//   try {
-//     await mongoose.connect(process.env.DB, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     });
-//     isConnected = true;
-//     console.log("MongoDB connected");
-//   } catch (error) {
-//     console.error("Error connecting to Mongo DB", error);
-//   }
-// };
-
-// app.use((req, res, next) => {
-//   if (!isConnected) {
-//     connectDB();
-//   }
-//   next();
-// });
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173", // frontend origin
-//     credentials: true, // allow cookies
-//   })
-// );
-// app.use(express.json());
-// app.use(cookieParser());
-
-// // API Routes
-// app.use("/api/posts", postRoutes);
-// app.use("/api/auth", authRoutes);
-// app.use("/api/admin", adminRoutes);
-
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-// module.exports = app;
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -66,9 +13,6 @@ dotenv.config();
 const app = express();
 const PORT = 5000;
 
-/* ===============================
-   MongoDB Connection (ONCE)
-================================ */
 let isConnected = false;
 
 const connectDB = async () => {
@@ -77,9 +21,9 @@ const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DB);
     isConnected = true;
-    console.log("✅ MongoDB connected");
+    console.log(" MongoDB connected");
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
+    console.error(" MongoDB connection error:", error);
     throw error;
     process.exit(1);
   }
@@ -87,12 +31,9 @@ const connectDB = async () => {
 
 connectDB();
 
-/* ===============================
-   Middlewares
-================================ */
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://your-frontend.vercel.app"],
+    origin: true,
     credentials: true,
   })
 );
@@ -100,15 +41,11 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-/* ===============================
-   Routes
-================================ */
+// Routes
+
 app.use("/api/posts", postRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 
-/* ===============================
-   Export for Vercel
-================================ */
 // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 module.exports = app;
