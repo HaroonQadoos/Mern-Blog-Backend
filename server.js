@@ -48,7 +48,7 @@
 // app.use("/api/admin", adminRoutes);
 
 // const PORT = process.env.PORT || 5000;
-// // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // module.exports = app;
 const express = require("express");
@@ -64,6 +64,7 @@ const adminRoutes = require("./routes/adminRoutes");
 dotenv.config();
 
 const app = express();
+const PORT = 5000;
 
 /* ===============================
    MongoDB Connection (ONCE)
@@ -109,4 +110,5 @@ app.use("/api/admin", adminRoutes);
 /* ===============================
    Export for Vercel
 ================================ */
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 module.exports = app;
