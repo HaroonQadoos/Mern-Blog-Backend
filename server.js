@@ -15,12 +15,14 @@ const app = express();
 const isConnected = false;
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.DB);
-    console.log("MongoDB connected");
+    await mongoose.connect(process.env.DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     isConnected = true;
+    console.log("MongoDB connected");
   } catch (error) {
-    console.error(error);
-    process.exit(1);
+    console.error("Error connecting to Mongo DB", error);
   }
 };
 
