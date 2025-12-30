@@ -35,7 +35,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5174",
-      "https://mern-blog-backend-94vv.vercel.app",
+      "https://mern-blog-frontend-peach-alpha.vercel.app",
     ],
     credentials: true,
   })
