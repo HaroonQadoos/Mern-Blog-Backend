@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
 
 const postRoutes = require("./routes/postRoutes");
 const authRoutes = require("./routes/authRoutes");
@@ -12,7 +13,7 @@ dotenv.config();
 const app = express();
 
 //Mongodb
-const isConnected = false;
+let isConnected = false;
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DB, {
