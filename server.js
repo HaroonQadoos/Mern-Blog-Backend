@@ -68,18 +68,19 @@ const app = express();
 /* ===============================
    MongoDB Connection (ONCE)
 ================================ */
-let isConnected = false;
+// let isConnected = false;
 
 const connectDB = async () => {
-  if (isConnected) return;
+  // if (isConnected) return;
 
   try {
     await mongoose.connect(process.env.DB);
-    isConnected = true;
+    // isConnected = true;
     console.log("✅ MongoDB connected");
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
     throw error;
+    process.exit(1);
   }
 };
 
